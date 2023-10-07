@@ -1,16 +1,20 @@
 {
   "manifest_version": 3,
   "name": "Mantis Helper",
-  "version": "1.0.0.0",
+  "version": "1.2.0.0",
+  "author": "Michael Fiedler",
   "permissions": ["contextMenus", "storage"],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "data/background.js"
   },
   "description": "Select a number on a website and open it in Mantis from the context menu",
-  "options_page": "options.html",
+  "options_page": "data/options.html",
     "icons": {
-    "16": "icon-16.png",
-    "48": "icon-48.png",
-    "128": "icon-128.png"
+    "16": "icons/icon16.png",
+	"32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+	"64": "icons/icon64.png",
+	"96": "icons/icon96.png",
+    "128": "icons/icon128.png"
   }
 }
