@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Mantis Helper",
+  "version": "1.0.0.0",
+  "permissions": ["contextMenus", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "description": "Select a number on a website and open it in Mantis from the context menu",
+  "options_page": "options.html",
+    "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  }
+}
