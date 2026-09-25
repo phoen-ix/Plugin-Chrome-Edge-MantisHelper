@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Options</title>
+  <meta charset="utf-8">
+  <title>Mantis Helper Options</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -31,12 +32,17 @@
     }
     input {
       padding: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
-	  width: 100%;
-	  box-sizing: border-box;
-	  
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #preview {
+      margin: 0 0 20px;
+      color: #555;
+      font-size: 0.9em;
+      overflow-wrap: anywhere;
     }
     button {
       padding: 10px 20px;
@@ -49,16 +55,23 @@
     button:hover {
       background-color: #0056b3;
     }
+    #status {
+      margin: 12px 0 0;
+      min-height: 1.2em;
+      color: #1a7f37;
+    }
   </style>
 </head>
 <body>
   <form id="optionsForm">
     <h1>Mantis Helper Options</h1>
-	<br> <br>
     <label for="customUrl">Mantis URL:</label>
-    <input type="text" id="customUrl" size="100">
+    <input type="url" id="customUrl" size="100" required placeholder="https://mantis.example.com/" aria-describedby="preview">
+    <p id="preview"></p>
     <button type="submit">Save</button>
+    <p id="status" role="status"></p>
   </form>
+  <script src="mantis.js"></script>
   <script src="options.js"></script>
 </body>
 </html>
