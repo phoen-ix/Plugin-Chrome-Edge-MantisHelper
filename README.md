@@ -26,7 +26,7 @@ The extension requires the following permissions:
    <img src="docs/screenshots/options-invalid.png" alt="The options page with mantis.example.com typed in; the hint to enter the address of the Mantis installation stays below the field" width="800">
 3. **Use it:** Highlight an issue number (e.g. `1234` or `#1234`) on a webpage, right-click, and select "Open in Mantis". If the selection holds no issue number, or several that are equally likely, this page opens instead:
 
-   <img src="docs/screenshots/menu-invalid-selection.png" alt="The Invalid selection page: No single issue number found in the selection" width="656">
+   <img src="docs/screenshots/menu-invalid-selection.png" alt="The Invalid selection page: No single issue number found in the selection" width="737">
 
 To use it in incognito windows, turn on "Allow in Incognito" (Chrome) or "Allow in InPrivate" (Edge) in the extension's details.
 
@@ -46,7 +46,7 @@ scripts/docs-screenshots.sh              # writes docs/screenshots/*.png
 scripts/docs-screenshots.sh ../shots     # another output dir
 ```
 
-The **Docs screenshots** workflow (Actions, manual) runs the same script and returns the PNGs as an artifact.
+The **Docs screenshots** workflow (Actions, manual) runs the same script and returns the PNGs as an artifact. The committed PNGs come from that workflow: Chromium shows the extension's own pages in the host's UI font where they set no font (the invalid-selection page), so a local run can differ there.
 
 ## Changelog
 

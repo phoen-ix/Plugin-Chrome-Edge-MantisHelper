@@ -31,4 +31,4 @@ address issue 1234 will open.
 Opens in a new tab when the selection holds no issue number, or several that are equally likely
 (here: “Issues 12 and 34”).
 
-<img src="menu-invalid-selection.png" alt="The Invalid selection page: No single issue number found in the selection" width="656">
+<img src="menu-invalid-selection.png" alt="The Invalid selection page: No single issue number found in the selection" width="737">
