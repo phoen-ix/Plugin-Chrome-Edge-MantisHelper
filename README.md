@@ -27,6 +27,7 @@ To use it in incognito windows, turn on "Allow in Incognito" (Chrome) or "Allow 
 ## Development
 - Try it out: open `chrome://extensions` or `edge://extensions`, turn on Developer mode, click "Load unpacked" and select this folder.
 - Package it for upload: `zip -r MantisHelper.zip manifest.json data icons README.md License.md`
+- Unit tests of the selection and URL parsing in `data/mantis.js`: `node --test tests/*.test.mjs`
 
 ## Changelog
 
