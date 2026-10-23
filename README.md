@@ -1,5 +1,7 @@
 # Mantis Helper — Chrome/Edge Extension
 
+<img src="docs/screenshots/options-saved.png" alt="The Mantis Helper options page after saving https://mantis.example.com/, with the preview of the address issue 1234 will open" width="800">
+
 ## Overview
 Mantis Helper is a Chrome/Edge extension that adds a context menu option for quickly opening issue numbers in [Mantis](https://www.mantisbt.org/), a popular bug tracking system. It streamlines your workflow by letting you navigate directly to Mantis issues from any webpage where an issue number is displayed.
 
@@ -19,8 +21,12 @@ The extension requires the following permissions:
 
 ## How to Use
 1. **Install** the extension from [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/lonfhapelejfelckobbncbdihemjnnjk) or the [Chrome Web Store](https://chromewebstore.google.com/detail/mantis-helper/ooojdplmloiglcdeenklfcjaimcboenp). It requires Chrome or Edge 99 or later.
-2. **Configure** your Mantis URL: open the extension's options (Extensions > Mantis Helper > Extension options) and enter the address of your Mantis installation. If you use "Open in Mantis" before configuring it, the options open automatically.
-3. **Use it:** Highlight an issue number (e.g. `1234` or `#1234`) on a webpage, right-click, and select "Open in Mantis".
+2. **Configure** your Mantis URL: open the extension's options (Extensions > Mantis Helper > Extension options) and enter the address of your Mantis installation. If you use "Open in Mantis" before configuring it, the options open automatically. An address without `http://` or `https://` is not saved:
+
+   <img src="docs/screenshots/options-invalid.png" alt="The options page with mantis.example.com typed in; the hint to enter the address of the Mantis installation stays below the field" width="800">
+3. **Use it:** Highlight an issue number (e.g. `1234` or `#1234`) on a webpage, right-click, and select "Open in Mantis". If the selection holds no issue number, or several that are equally likely, this page opens instead:
+
+   <img src="docs/screenshots/menu-invalid-selection.png" alt="The Invalid selection page: No single issue number found in the selection" width="656">
 
 To use it in incognito windows, turn on "Allow in Incognito" (Chrome) or "Allow in InPrivate" (Edge) in the extension's details.
 
@@ -28,6 +34,19 @@ To use it in incognito windows, turn on "Allow in Incognito" (Chrome) or "Allow 
 - Try it out: open `chrome://extensions` or `edge://extensions`, turn on Developer mode, click "Load unpacked" and select this folder.
 - Package it for upload: `zip -r MantisHelper.zip manifest.json data icons README.md License.md`
 - Unit tests of the selection and URL parsing in `data/mantis.js`: `node --test tests/*.test.mjs`
+
+CI (`.github/workflows/ci.yml`) runs the unit tests and the docs tour below on every push to `master` and every pull request.
+
+## Screenshots
+Every screenshot comes from the docs tour (`e2e/docs/tour.spec.ts`): it loads the extension unpacked into headless Chromium and photographs each of its pages into [`docs/screenshots/`](docs/screenshots/README.md), the gallery. The context menu itself is browser UI and cannot be captured. No server and no Docker are involved:
+
+```bash
+cd e2e && npm ci && npx playwright install chromium && cd ..
+scripts/docs-screenshots.sh              # writes docs/screenshots/*.png
+scripts/docs-screenshots.sh ../shots     # another output dir
+```
+
+The **Docs screenshots** workflow (Actions, manual) runs the same script and returns the PNGs as an artifact.
 
 ## Changelog
 

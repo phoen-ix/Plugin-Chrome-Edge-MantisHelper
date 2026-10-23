@@ -1,0 +1,35 @@
+name: CI
+
+# The unit tests of data/mantis.js, and the docs tour (e2e/docs/) as a render
+# check: it loads the unpacked extension into headless Chromium, so a page that
+# throws or a manifest Chromium rejects fails the push. Its screenshots go to
+# the runner's temp dir; docs-screenshots.yml is the one that hands them out.
+on:
+  push:
+    branches: [master]
+  pull_request: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+
+      - name: Unit tests
+        run: node --test tests/*.test.mjs
+
+      - name: Install Playwright
+        working-directory: e2e
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Docs tour (render check)
+        run: ARTIFACTS="$RUNNER_TEMP/docs-run" bash scripts/docs-screenshots.sh "$RUNNER_TEMP/screenshots"
