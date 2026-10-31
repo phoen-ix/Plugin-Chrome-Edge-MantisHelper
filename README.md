@@ -35,7 +35,15 @@ To use it in incognito windows, turn on "Allow in Incognito" (Chrome) or "Allow 
 - Package it for upload: `zip -r MantisHelper.zip manifest.json data icons README.md License.md`
 - Unit tests of the selection and URL parsing in `data/mantis.js`: `node --test tests/*.test.mjs`
 
-CI (`.github/workflows/ci.yml`) runs the unit tests and the docs tour below on every push to `master` and every pull request.
+CI (`.github/workflows/ci.yml`) runs the unit tests, the docs tour below and the e2e suite on every push to `master` and every pull request.
+
+## E2E
+The e2e suite (`e2e/tests/`) loads the unpacked extension into a fresh headless Chromium profile per test and drives the options page, the hint page and the context menu's click handler (the menu itself is browser UI). [`e2e/COVERAGE.md`](e2e/COVERAGE.md) maps every feature to its test. No server and no Docker:
+
+```bash
+cd e2e && npm ci && npx playwright install chromium && cd ..
+scripts/e2e.sh                       # all tests; Playwright args pass through, e.g. -g options
+```
 
 ## Screenshots
 Every screenshot comes from the docs tour (`e2e/docs/tour.spec.ts`): it loads the extension unpacked into headless Chromium and photographs each of its pages into [`docs/screenshots/`](docs/screenshots/README.md), the gallery. The context menu itself is browser UI and cannot be captured. No server and no Docker are involved:
