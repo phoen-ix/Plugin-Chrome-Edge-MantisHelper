@@ -115,3 +115,24 @@ test('an unusable address saved by v1.x is shown with the hint, to be corrected'
   await expect(page.getByRole('status')).toHaveText('Options saved.')
   expect(await storedUrl(worker)).toBe(`${MANTIS}view.php?id=`)
 })
+
+test('what is typed before the saved URL has loaded is kept, and Save saves it', async ({ context, worker, extensionId }) => {
+  // Storage answers late, after the user has started typing (seen in CI): each
+  // read keeps the value from when it was made and answers 500 ms later.
+  const page = await context.newPage()
+  await page.addInitScript(() => {
+    const w = window as any
+    const sync = chrome.storage.sync
+    const get = sync.get.bind(sync)
+    w.storageReads = 0
+    ;(sync as any).get = (key: string) =>
+      get(key).then((value) => new Promise((resolve) => setTimeout(() => (w.storageReads++, resolve(value)), 500)))
+  })
+  await page.goto(`chrome-extension://${extensionId}/data/options.html`)
+  await page.getByLabel('Mantis URL:').fill(MANTIS)
+  await page.waitForFunction(() => (window as any).storageReads > 0)
+  await expect(page.getByLabel('Mantis URL:')).toHaveValue(MANTIS)
+  await page.getByRole('button', { name: 'Save' }).click()
+  await expect(page.getByRole('status')).toHaveText('Options saved.')
+  expect(await storedUrl(worker)).toBe(`${MANTIS}view.php?id=`)
+})
