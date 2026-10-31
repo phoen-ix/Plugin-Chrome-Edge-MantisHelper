@@ -140,6 +140,35 @@ test('options: saved', async () => {
   await shoot(page, 'options-saved', { around: page.locator('form') })
 })
 
+/** WCAG contrast ratio of two opaque computed colours, "rgb(r, g, b)". */
+function contrast(...colors: string[]): number {
+  const [hi, lo] = colors
+    .map((color) => {
+      const [r, g, b] = color.match(/\d+/g)!.map((v) => {
+        const c = Number(v) / 255
+        return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+      })
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b
+    })
+    .sort((a, b) => b - a)
+  return (hi + 0.05) / (lo + 0.05)
+}
+
+test('options: contrast, and a window shorter than the form', async () => {
+  const page = await optionsPage()
+  const style = (selector: string, prop: string) =>
+    page.locator(selector).evaluate((el, prop) => getComputedStyle(el).getPropertyValue(prop), prop)
+  // WCAG AA: 4.5:1 for the button's text, 3:1 for the field's border on the card.
+  expect(contrast(await style('button', 'color'), await style('button', 'background-color'))).toBeGreaterThanOrEqual(4.5)
+  expect(
+    contrast(await style('#customUrl', 'border-top-color'), await style('#optionsForm', 'background-color')),
+  ).toBeGreaterThanOrEqual(3)
+  // The page scrolls; it does not cut off the top of the form.
+  await page.setViewportSize({ width: 1280, height: 200 })
+  await page.evaluate(() => window.scrollTo(0, 0))
+  expect((await page.locator('#optionsForm').boundingBox())!.y).toBeGreaterThanOrEqual(0)
+})
+
 test('context menu: no single issue number in the selection', async () => {
   await optionsPage(`${MANTIS_URL}view.php?id=`)
   const hint = context.waitForEvent('page')
