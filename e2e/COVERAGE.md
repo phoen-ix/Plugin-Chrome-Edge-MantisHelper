@@ -24,8 +24,8 @@ a console error in any page or in the service worker fails a test.
 
 ## Pages × states (breadth: `sweep.spec.ts`)
 
-Every page, not configured and configured, at 1280 × 800 and 390 × 844: title, its heading, nothing
-sticking out sideways.
+Every page, not configured and configured, at 1280 × 800, 390 × 844 and 320 × 256 (1280 × 1024 zoomed to
+400 %, WCAG 1.4.10): title, its heading, nothing sticking out sideways or above the top.
 
 | Page | Not configured | Configured |
 |---|---|---|
