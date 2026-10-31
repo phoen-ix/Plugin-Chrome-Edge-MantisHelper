@@ -58,6 +58,11 @@ The **Docs screenshots** workflow (Actions, manual) runs the same script and ret
 
 ## Changelog
 
+### v2.0.3
+Fixed:
+- The Save button's text and the URL field's border had too little contrast.
+- Text typed into the options page right after it opened could be wiped when the saved URL finished loading, and Save then did nothing.
+
 ### v2.0.2
 Fixed:
 - The options page could not be scrolled to its top when the window was lower than the form (e.g. zoomed in).
