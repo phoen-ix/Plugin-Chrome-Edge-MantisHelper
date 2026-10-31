@@ -126,8 +126,8 @@ for (const [state, url] of [
 }
 
 test('the menu is registered on install, with the selection in its title, and again after a restart or update', async ({ worker }) => {
-  // update() fails for a menu id that does not exist.
-  await worker.evaluate(() => chrome.contextMenus.update('openInMantis', {}))
+  // update() fails for a menu id that does not exist; onInstalled may still be creating it.
+  await expect(() => worker.evaluate(() => chrome.contextMenus.update('openInMantis', {}))).toPass()
   expect(await worker.evaluate(() => [
     chrome.runtime.onStartup.hasListener(setUpMenu),
     chrome.contextMenus.onClicked.hasListener(handleMenuClick),
