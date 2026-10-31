@@ -58,7 +58,7 @@ The **Docs screenshots** workflow (Actions, manual) runs the same script and ret
 
 ## Changelog
 
-### Unreleased
+### v2.0.2
 Fixed:
 - The options page could not be scrolled to its top when the window was lower than the form (e.g. zoomed in).
 
