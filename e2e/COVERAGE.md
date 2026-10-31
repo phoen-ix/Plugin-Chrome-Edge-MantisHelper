@@ -37,7 +37,7 @@ Every page, not configured and configured, at 1280 × 800, 390 × 844 and 320 ×
 | Feature / state | Test |
 |---|---|
 | Registered on install, for selections, with the selection in its title (`Open “%s” in Mantis`) | ✅ menu › the menu is registered on install, with the selection in its title, and again after a restart or update |
-| Set up again after a browser restart or update (Chrome restored it: duplicate id → update) | ✅ menu › the menu is registered on install, … and again after a restart or update |
+| Set up again after a browser restart or update (listener on `onStartup`; Chrome restored it: duplicate id → update) | ✅ menu › the menu is registered on install, … and again after a restart or update |
 | The menu entry as drawn by the browser (right-click, title with the selection) | ❌ (d) browser UI outside the page; neither Playwright nor CDP can open or read it. Its title and contexts are asserted at the API (row 1) |
 | A single issue number opens `<prefix><id>` in a new tab next to the source tab (index + 1, opener) | ✅ menu › a configured extension › “1234” opens issue 1234 next to its tab |
 | `#1234`, zero-padded `0001234`, a number in text (`Issue #1234: Fix login bug`, `0001234: Fix login bug`), `#` wins over a plain number | ✅ menu › a configured extension › “#1234” / “0001234” / “Issue #1234: Fix login bug” / “0001234: Fix login bug” / “See #1234 and 56.” opens issue 1234 next to its tab (the full matrix: `tests/mantis.test.mjs` › findIssueId: …) |

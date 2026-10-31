@@ -7,6 +7,7 @@ import { MANTIS, clickMenu, expect, selectionOf, sourcePage, storeUrl, tabOf, te
 
 declare const chrome: any
 declare function setUpMenu(): void
+declare function handleMenuClick(info: object, tab: unknown): Promise<void>
 
 const ISSUE = `${MANTIS}view.php?id=1234`
 
@@ -127,6 +128,10 @@ for (const [state, url] of [
 test('the menu is registered on install, with the selection in its title, and again after a restart or update', async ({ worker }) => {
   // update() fails for a menu id that does not exist.
   await worker.evaluate(() => chrome.contextMenus.update('openInMantis', {}))
+  expect(await worker.evaluate(() => [
+    chrome.runtime.onStartup.hasListener(setUpMenu),
+    chrome.contextMenus.onClicked.hasListener(handleMenuClick),
+  ])).toEqual([true, true])
   // On a restart or an update Chrome restores the menu before the extension sets
   // it up again: the duplicate id must turn into an update of the menu.
   const calls = await worker.evaluate(async () => {
