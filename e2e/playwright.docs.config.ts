@@ -25,7 +25,9 @@ export default defineConfig({
     locale: 'en-GB',
     timezoneId: 'Europe/Vienna',
     launchOptions: {
-      args: ['--lang=en-GB'],
+      // The fake sites fail to resolve inside Chromium, as an unknown host does, without a DNS query;
+      // a tab the extension opens loads before its route exists and is retried once it does.
+      args: ['--lang=en-GB', '--host-resolver-rules=MAP *.example.com ~NOTFOUND'],
       env: { ...process.env, LANG: 'en_GB.UTF-8', LANGUAGE: 'en_GB:en', LC_ALL: 'en_GB.UTF-8' },
     },
     contextOptions: { reducedMotion: 'reduce' },
