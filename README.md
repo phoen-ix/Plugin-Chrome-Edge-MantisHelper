@@ -1,30 +1,39 @@
 # Mantis Helper — Chrome/Edge Extension
 
+A Chrome and Edge extension for users of the [Mantis](https://www.mantisbt.org/) bug tracker: select an issue number on any web page, right-click, and the issue opens in Mantis.
+
 <img src="docs/screenshots/options-saved.png" alt="The Mantis Helper options page after saving https://mantis.example.com/, with the preview of the address issue 1234 will open" width="800">
 
-## Overview
-Mantis Helper is a Chrome/Edge extension that adds a context menu option for quickly opening issue numbers in [Mantis](https://www.mantisbt.org/), a popular bug tracking system. It streamlines your workflow by letting you navigate directly to Mantis issues from any webpage where an issue number is displayed.
+**Status:** current version v2.0.3 ([changelog](#changelog)). More screenshots: [the gallery](docs/screenshots/README.md).
 
 Get it from [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/lonfhapelejfelckobbncbdihemjnnjk) or the [Chrome Web Store](https://chromewebstore.google.com/detail/mantis-helper/ooojdplmloiglcdeenklfcjaimcboenp). A Firefox version is available at [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/mantis-helper/).
 
 ## Features
-- **Context Menu Integration:** Select an issue number on any webpage, right-click, and choose **Open “…” in Mantis**. The menu shows the selected text, and the issue opens in a new tab next to the current one, in the same tab group.
-- **Finds the Number in the Selection:** `1234`, `#1234`, `0001234` and selections like `Issue #1234:` or `0001234: Fix login bug` all open issue 1234. If the selection contains several numbers, a `#` number wins, then a zero-padded one like Mantis displays them; otherwise the selection is ambiguous and a hint page opens.
-- **Simple Configuration:** Enter the address of your Mantis installation (e.g. `https://mantis.example.com/`) and `view.php?id=` is appended automatically. Pasting a Mantis page or issue link works too, and URLs with a query string (e.g. `https://mantis.example.com/view.php?id=`) are used as they are. The options page shows which address an issue number will open.
+- **Context Menu Integration:** Select an issue number on any webpage, right-click, and choose **Open “…” in Mantis**. The menu shows the selected text.
+- **Opens Beside the Current Tab:** the issue opens in a new tab next to the current one, in the same tab group.
+- **Finds the Number in the Selection:** `1234`, `#1234`, `0001234` and selections like `Issue #1234:` or `0001234: Fix login bug` all open issue 1234.
+  - Several numbers: a `#` number wins, then a zero-padded one like Mantis displays them.
+  - Otherwise the selection is ambiguous and a hint page opens.
+- **Simple Configuration:** Enter the address of your Mantis installation (e.g. `https://mantis.example.com/`) and `view.php?id=` is appended automatically.
+  - Pasting a Mantis page or issue link works too.
+  - URLs with a query string (e.g. `https://mantis.example.com/view.php?id=`) are used as they are.
+  - The options page shows which address an issue number will open.
 
 ## Permissions
 The extension requires the following permissions:
-- **Context Menus** — To add the "Open in Mantis" option to the browser's right-click menu.
-- **Storage** — To save the Mantis URL that you set in the options.
+- **Context Menus** — To add **Open “…” in Mantis** to the browser's right-click menu.
+- **Storage** — To save the Mantis URL that you set in the options. If you use Chrome or Edge sync, it is synced too.
 
-**Data collection:** none. Mantis Helper sends nothing to its developer or anyone else. When you choose "Open in Mantis", the selected number is opened as a link on the Mantis server you configured. See [PRIVACY.md](PRIVACY.md).
+**Data collection:** none. Mantis Helper sends nothing to its developer or anyone else. When you choose **Open “…” in Mantis**, the selected number is opened as a link on the Mantis server you configured. See [PRIVACY.md](PRIVACY.md).
 
 ## How to Use
 1. **Install** the extension from [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/lonfhapelejfelckobbncbdihemjnnjk) or the [Chrome Web Store](https://chromewebstore.google.com/detail/mantis-helper/ooojdplmloiglcdeenklfcjaimcboenp). It requires Chrome or Edge 99 or later.
-2. **Configure** your Mantis URL: open the extension's options (Extensions > Mantis Helper > Extension options) and enter the address of your Mantis installation. If you use "Open in Mantis" before configuring it, the options open automatically. An address without `http://` or `https://` is not saved:
+2. **Configure** your Mantis URL: open the extension's options (Extensions > Mantis Helper > Extension options) and enter the address of your Mantis installation. An address without `http://` or `https://` is not saved:
 
    <img src="docs/screenshots/options-invalid.png" alt="The options page with mantis.example.com typed in; the hint to enter the address of the Mantis installation stays below the field" width="800">
-3. **Use it:** Highlight an issue number (e.g. `1234` or `#1234`) on a webpage, right-click, and select "Open in Mantis". If the selection holds no issue number, or several that are equally likely, this page opens instead:
+
+   If you use the menu entry before configuring it, the options open automatically.
+3. **Use it:** Highlight an issue number (e.g. `1234` or `#1234`) on a webpage, right-click, and select **Open “…” in Mantis**. If the selection holds no issue number, or several that are equally likely, this page opens instead:
 
    <img src="docs/screenshots/menu-invalid-selection.png" alt="The Invalid selection page: No single issue number found in the selection" width="737">
 
