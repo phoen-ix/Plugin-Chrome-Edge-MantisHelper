@@ -1,6 +1,6 @@
 name: CI
 
-# Job test: the unit tests of data/mantis.js, and the docs tour (e2e/docs/) as
+# Job test: ESLint, the unit tests of data/mantis.js, and the docs tour (e2e/docs/) as
 # a render check: it loads the unpacked extension into headless Chromium, so a
 # page that throws or a manifest Chromium rejects fails the push. Its
 # screenshots go to the runner's temp dir; docs-screenshots.yml is the one that
@@ -25,8 +25,13 @@ jobs:
         with:
           node-version: '26'
 
+      - run: npm ci --no-audit --no-fund
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
       - name: Unit tests
-        run: node --test tests/*.test.mjs
+        run: npm test
 
       - name: Install Playwright
         working-directory: e2e

@@ -2,3 +2,4 @@
 *.crx
 *.pem
 build/
+node_modules/

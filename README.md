@@ -42,9 +42,10 @@ To use it in incognito windows, turn on "Allow in Incognito" (Chrome) or "Allow 
 ## Development
 - Try it out: open `chrome://extensions` or `edge://extensions`, turn on Developer mode, click "Load unpacked" and select this folder.
 - Package it for upload: `zip -r MantisHelper.zip manifest.json data icons README.md License.md`
-- Unit tests of the selection and URL parsing in `data/mantis.js`: `node --test tests/*.test.mjs`
+- Lint: `npm ci && npm run lint` (ESLint, `eslint.config.mjs`)
+- Unit tests of the selection and URL parsing in `data/mantis.js`: `npm test`
 
-CI (`.github/workflows/ci.yml`) runs the unit tests, the docs tour below and the e2e suite on every push to `master` and every pull request.
+CI (`.github/workflows/ci.yml`) runs ESLint, the unit tests, the docs tour below and the e2e suite on every push to `master` and every pull request.
 
 ## E2E
 The e2e suite (`e2e/tests/`) loads the unpacked extension into a fresh headless Chromium profile per test and drives the options page, the hint page and the context menu's click handler (the menu itself is browser UI). [`e2e/COVERAGE.md`](e2e/COVERAGE.md) maps every feature to its test. No server and no Docker:

@@ -1,4 +1,5 @@
 // Helpers shared by the background script and the options page.
+/* exported findIssueId, normalizeMantisUrl */
 
 // Version 1.x pre-filled this placeholder in the options, so it was often saved as-is
 const LEGACY_DEFAULT_URL = 'https://example.com/view.php?id=';
@@ -8,7 +9,7 @@ const LEGACY_DEFAULT_URL = 'https://example.com/view.php?id=';
 // wins over any other standalone number.
 function findIssueId(text) {
   const matches = String(text ?? '').split(/\s+/)
-    .map(word => word.replace(/^[(\[{<"'„“”‚‘’«»‹›]+|[)\]}>"'„“”‚‘’«»‹›:;,.!?]+$/g, ''))
+    .map(word => word.replace(/^[([{<"'„“”‚‘’«»‹›]+|[)\]}>"'„“”‚‘’«»‹›:;,.!?]+$/g, ''))
     .map(word => /^(#?)0*([1-9]\d{0,9})$/.exec(word))
     .filter(Boolean);
   const candidates = [

@@ -1,4 +1,5 @@
 importScripts('mantis.js');
+/* global findIssueId, normalizeMantisUrl -- mantis.js */
 
 const MENU_ID = 'openInMantis';
 const MENU_PROPERTIES = {

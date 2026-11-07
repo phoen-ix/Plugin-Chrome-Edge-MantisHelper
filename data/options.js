@@ -1,3 +1,4 @@
+/* global normalizeMantisUrl, LEGACY_DEFAULT_URL -- mantis.js */
 const HINT = 'Enter the address of your Mantis installation, e.g. https://mantis.example.com/';
 
 const form = document.getElementById('optionsForm');
