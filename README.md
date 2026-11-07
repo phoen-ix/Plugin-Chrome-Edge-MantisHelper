@@ -1,5 +1,8 @@
 # Mantis Helper — Chrome/Edge Extension
 
+> **Moved:** the Chrome/Edge and Firefox versions now share one code base in
+> [phoen-ix/MantisHelper](https://github.com/phoen-ix/MantisHelper). This repository is archived.
+
 A Chrome and Edge extension for users of the [Mantis](https://www.mantisbt.org/) bug tracker: select an issue number on any web page, right-click, and the issue opens in Mantis.
 
 <img src="docs/screenshots/options-saved.png" alt="The Mantis Helper options page after saving https://mantis.example.com/, with the preview of the address issue 1234 will open" width="800">
